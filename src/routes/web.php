@@ -22,5 +22,7 @@ Route::group(['namespace' => 'Dorcas\ModulesFinanceTax\Http\Controllers', 'middl
     Route::get('tax-run/{id}','ModulesFinanceTaxController@singleRun')->name('single_run');
     Route::put('tax-run/{id}','ModulesFinanceTaxController@updateRun')->name('update_run');
     Route::delete('tax-run/{id}','ModulesFinanceTaxController@deleteRun')->name('delete_run');
+    Route::get('tax-run/total/authorities/{id}','ModulesFinanceTaxController@getTotalTaxAuthority')->name('tax-run-authorities-total');
+
 
 });

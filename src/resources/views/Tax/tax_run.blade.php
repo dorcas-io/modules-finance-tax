@@ -173,8 +173,13 @@
 
         function processRows(row,index) {
             row.created_at = moment(row.created_at).format('DD MMM, YYYY');
+            if(row.status !== 'processed'){
+                '<a class="btn btn-warning" data-status="'+row.isActive+'" data-index="'+index+'"  data-action="edit_run" data-id="'+row.id+'" data-name="'+row.name+'">Update</a> &nbsp;';
+
+            }
             row.buttons =
-                '<a class="text-warning" data-status="'+row.isActive+'" data-index="'+index+'"  data-action="edit_run" data-id="'+row.id+'" data-name="'+row.name+'"><i class="fe fe-edit-3"></i></a> &nbsp; ';
+                '<a class="btn btn-sm btn-primary text-white"  href="/mfn/tax-run/total/authorities/' + row.id + '">View Tax  Authorities Slip</a> &nbsp;';
+
 
         }
 

@@ -444,4 +444,23 @@ class ModulesFinanceTaxController extends Controller
             return response()->json(['message' => $e->getMessage()], 400);
         }
     }
+
+    public function getTotalTaxAuthority(Sdk $sdk, string  $id){
+        $this->data['header']['title'] = 'Total' . ' Payslip';
+        $resource = $sdk->createTaxResource();
+        $response = $resource->send('get',['run',$id,'processed-authorities']);
+        if(!$response->isSuccessful() ) {
+            $response = (tabler_ui_html_response([$response->errors[0]['title'] ?? 'Failed to get Data for the Tax Run']))->setType(UiResponse::TYPE_ERROR);
+            return redirect()-back()->with('UiResponse', $response);
+        }
+        if($response->getData() === '[]'){
+            $response = (tabler_ui_html_response([$response->errors[0]['title'] ?? 'Failed to get Data for the Tax Run ']))->setType(UiResponse::TYPE_ERROR);
+            return redirect()->back()->with('UiResponse', $response);
+        }
+        $this->data['payment_date'] = collect($response->getData(true))->pluck('created_at')->first();
+        $this->data['processed_authorities'] = collect($response->getData(true));
+        $this->data['total_amount_payable'] = collect($response->getData(true))->sum('total_amount');
+        return view('modules-finance-tax::Tax/tax_authority_slip', $this->data);
+
+    }
 }
