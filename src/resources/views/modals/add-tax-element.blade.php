@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="submitElement()"  id="tax_element_add" method="post">
+                <form @submit.prevent="submitElement()"  id="tax_element_add" >
                     <fieldset>
                         <div class="form-group col-md-12">
                             <label class="form-label" for="authority">Name </label>
