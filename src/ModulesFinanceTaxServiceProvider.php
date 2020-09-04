@@ -17,11 +17,11 @@ class ModulesFinanceTaxServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/resources/views', 'modules-finance-tax');
         $this->publishes([
             __DIR__.'/config/modules-finance-tax.php' => config_path('modules-finance-tax.php'),
-        ], 'config');
+        ], 'dorcas-modules');
         // adds models to directory path
         $this->publishes([
             __DIR__.'/Models/TaxAuthorities.php' => app_path('Models/TaxAuthorities.php')
-        ]);
+        ], 'dorcas-modules');
 
         // you can add any number of migrations here
         if ($this->app->runningInConsole()) {
